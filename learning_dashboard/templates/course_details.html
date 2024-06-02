@@ -1,0 +1,25 @@
+<!-- templates/course_details.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Details</title>
+</head>
+<body>
+    <h1>{{ course.title }}</h1>
+    <p>{{ course.description }}</p>
+    
+    <h2>Assignments</h2>
+    <ul>
+        {% for assignment in course.assignments %}
+            <li>
+                <strong>{{ assignment.title }}</strong> - Due: {{ assignment.due_date }}
+                <!-- Optionally, add functionality to mark as completed, edit, or delete -->
+            </li>
+        {% endfor %}
+    </ul>
+    
+    <!-- Link back to the main dashboard -->
+    <a href="/">Back to Dashboard</a>
+</body>
+</html>

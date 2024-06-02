@@ -1,0 +1,43 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Learning Dashboard</title>
+    <!-- Link to CSS files -->
+</head>
+<body>
+    <h1>My Learning Dashboard</h1>
+    <div id="courses">
+        <!-- Course information will be dynamically inserted here -->
+    </div>
+    <!-- Link to JavaScript files -->
+    <!-- Add Course Form -->
+<div>
+    <h2>Add New Course</h2>
+    <form action="/add_course" method="post">
+        <label for="title">Course Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+        
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea><br><br>
+        
+        <!-- Add additional fields as necessary -->
+        
+        <input type="submit" value="Add Course">
+    </form>
+</div>
+<div id="courses">
+    <h2>My Courses</h2>
+    <ul>
+        {% for course in courses %}
+            <li>
+                <strong>{{ course.title }}</strong> - {{ course.description }}
+                <!-- Add a link to view course details and assignments -->
+                <a href="/course/{{ course.id }}">View Details</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+</body>
+</html>

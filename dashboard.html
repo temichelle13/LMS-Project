@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Dashboard</title>
+    <!-- Add CSS for styling -->
+</head>
+<body>
+    <div id="dashboard">
+        <div id="upcoming-assignments">
+            <h2>Upcoming Assignments</h2>
+            <!-- Dynamically populated with JavaScript -->
+        </div>
+        <div id="course-progress">
+            <h2>Course Progress</h2>
+            <!-- Course progress charts -->
+        </div>
+        <div id="achievements">
+            <h2>Recent Achievements</h2>
+            <!-- List of achievements -->
+        </div>
+        <div id="study-time-analytics">
+            <h2>Study Time Analytics</h2>
+            <!-- Study time graphs -->
+        </div>
+        <div id="grade-overview">
+            <h2>Grade Overview</h2>
+            <!-- Grade summary -->
+        </div>
+    </div>
+    <!-- Add JavaScript for dynamic content and API calls -->
+    document.addEventListener('DOMContentLoaded', function() {
+    // Example: Mark an assignment as complete
+    const completeButtons = document.querySelectorAll('.mark-complete-button');
+    completeButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            const assignmentId = this.dataset.assignmentId;
+            // API call to mark the assignment as complete
+            fetch(`/api/assignments/${assignmentId}/complete`, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if(data.success) {
+                        // Update the UI to reflect the completion
+                        document.querySelector(`#assignment-${assignmentId}`).classList.add('completed');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    });
+
+    // Example: Goal setting (simplified)
+    document.getElementById('set-goal-button').addEventListener('click', function() {
+        const goalInput = document.getElementById('goal-input').value;
+        // Assuming there's an API endpoint to save a user's goal
+        fetch('/api/goals/set', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ goal: goalInput }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Update the UI to show the new goal
+                alert('Goal set successfully!');
+            })
+            .catch(error => console.error('Error:', error));
+    });
+});
+</div>
+</body>
+</html>
